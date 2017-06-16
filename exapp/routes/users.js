@@ -24,10 +24,10 @@ router.get('/', function(req, res, next) {
       res.send();
     }
     else {
-      var usersJson = data.Items;
+      var users = data.Items;
 
       res.header('Content-Type', 'application/json; charset=utf-8');
-      res.send(usersJson);
+      res.send(users);
     }
   });
 });
@@ -67,12 +67,20 @@ router.get('/:userId', function(req, res, next) {
 */
 router.put('/:userId', function(req, res, next) {
 
-  var userJson = req.body;
-  console.log(userJson);
+  var user = req.body;
+
+  if ('userId' in user && user.userId != req.params.userId) {
+    res.status(httpStatus.BAD_REQUEST);
+    res.send();
+    return;
+  }
+  else {
+    user.userId = req.params.userId;
+  }
 
   var params = {
     TableName:'USERS',
-    Item: userJson
+    Item: user
   }
 
   //DynamoDBへユーザを登録
