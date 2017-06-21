@@ -6,7 +6,7 @@ var router = express.Router();
 
 aws.config.update({
   region:'ap-northeast-1',
-  httpOptions: { agent: proxy('http://proxy.ykhm.cij.co.jp:8080') }
+  httpOptions: { agent: proxy('http://xxxx:8080') }
 });
 var dynamoClient = new aws.DynamoDB.DocumentClient();
 
