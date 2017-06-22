@@ -14,6 +14,9 @@ Node.js、DynamoDBを使用したREST APIのサンプル
 aws_access_key_id = xx<br />
 aws_secret_access_key = xx<br />
 
+### PROXY設定
+- set-item env:HTTP_PROXY -value http://xxx:8080
+
 ### ファイル取得
 - git clone https://github.com/abewataru/nodejs-sample.git
 - cd exapp
