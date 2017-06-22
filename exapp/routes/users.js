@@ -5,9 +5,19 @@ var proxy = require('proxy-agent');
 var router = express.Router();
 
 aws.config.update({
-  region:'ap-northeast-1',
-  httpOptions: { agent: proxy('http://xxxx:8080') }
+  region:'ap-northeast-1'
 });
+
+//プロキシ設定は環境変数から取得
+if(process.env.HTTP_PROXY || process.env.http_proxy){
+    var httpProxy = process.env.HTTP_PROXY ? process.env.HTTP_PROXY : process.env.http_proxy;
+    aws.config.update({
+        httpOptions: {
+            agent: proxy(httpProxy)
+        }
+    });
+}
+
 var dynamoClient = new aws.DynamoDB.DocumentClient();
 
 /*
